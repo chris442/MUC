@@ -1,0 +1,94 @@
+package com.example.muc_coursework;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+	
+	private GoogleMap googleMap;
+	
+	static final LatLng GLASGOW = new LatLng(55.8580,-4.2590);
+	static final LatLng SECC = new LatLng(55.8607,-4.2871);
+	static final LatLng BARRY_BUDDON_SHOOTING = new LatLng(56.499, -2.7543);
+	static final LatLng PARKHEAD = new LatLng(55.8497, -4.2055);
+	static final LatLng CATHKIN_BRAES= new LatLng(55.79434, -4.2193);
+	static final LatLng VELODROME = new LatLng(55.847, -4.2076);
+	static final LatLng INTERNATIONAL_HOCKEY = new LatLng(55.8447, -4.236);
+	static final LatLng HAMPDEN = new LatLng(55.8255, -4.2520);
+	static final LatLng IBROX = new LatLng(55.853,-4.309);
+	static final LatLng KELVINGROVE_BOWLS= new LatLng(55.867,-4.2871);
+	static final LatLng SCOTSTOUN = new LatLng(55.8813,-4.3405);
+	static final LatLng TOLLCROSS = new LatLng(55.845, -4.177);
+	static final LatLng STRATHCLYDE = new LatLng(55.7971971, -4.0342997);
+	
+	static final LatLng DELHI= new LatLng(28.61, 77.23);
+	static final LatLng MELBOURNE = new LatLng(-37.813611, 144.963056);
+	static final LatLng MANCHESTER = new LatLng(53.466667, -2.233333);
+	static final LatLng KUALALUMPUR = new LatLng(3.1475, 101.693333);
+	static final LatLng VICTORIA = new LatLng(48.428611, -123.365556);
+	static final LatLng AUCKLAND= new LatLng(-36.840417, 174.739869);
+	static final LatLng BRISBANE = new LatLng(-27.467917, 153.027778);
+	static final LatLng EDMONTON = new LatLng(53.533333, -113.5);
+	static final LatLng CHRISTCHURCH = new LatLng(-43.53, 172.620278);
+	static final LatLng EDINBURGH = new LatLng(55.939, -3.172);
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        try
+        {
+        	initializeMap();
+        }catch (Exception e)
+        {
+        	e.printStackTrace();
+        }
+    }
+    
+    private void initializeMap()
+    {
+    	if(googleMap==null)
+    	{
+    		googleMap=((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+    		
+    		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(GLASGOW, 10));
+    		
+    		Marker glasgow =googleMap.addMarker(new MarkerOptions().position(GLASGOW).title("Glasgow"));
+    		Marker secc =googleMap.addMarker(new MarkerOptions().position(SECC).title("SECC"));
+    		Marker barryBuddonShooting =googleMap.addMarker(new MarkerOptions().position(BARRY_BUDDON_SHOOTING).title("Barry Buddon Shooting"));
+    		Marker parkhead =googleMap.addMarker(new MarkerOptions().position(PARKHEAD).title("Parkhead"));
+    		Marker cathkinBraes =googleMap.addMarker(new MarkerOptions().position(CATHKIN_BRAES).title("Cathkin Braes"));
+    		Marker veledrome =googleMap.addMarker(new MarkerOptions().position(VELODROME).title("Veledrome"));
+    		Marker internationalHockey =googleMap.addMarker(new MarkerOptions().position(INTERNATIONAL_HOCKEY).title("International Hockey"));
+    		Marker hampden =googleMap.addMarker(new MarkerOptions().position(HAMPDEN).title("Hampden"));
+    		Marker ibrox =googleMap.addMarker(new MarkerOptions().position(IBROX).title("Ibrox"));
+    		Marker kelvingroveBowls =googleMap.addMarker(new MarkerOptions().position(KELVINGROVE_BOWLS).title("Kelvingrove Bowls"));
+    		Marker scotstoun =googleMap.addMarker(new MarkerOptions().position(SCOTSTOUN).title("Scotstoun"));
+    		Marker tollcross =googleMap.addMarker(new MarkerOptions().position(TOLLCROSS).title("Tollcross"));
+    		Marker strathclyde =googleMap.addMarker(new MarkerOptions().position(STRATHCLYDE).title("Strathclyde"));
+    		Marker edinburgh =googleMap.addMarker(new MarkerOptions().position(EDINBURGH).title("Edinburgh"));
+    		
+    		if(googleMap==null)
+    		{
+    			Toast.makeText(getApplicationContext(), "WARNING! Unable to create map", Toast.LENGTH_SHORT).show();
+    		}
+    	}
+    } 
+    @Override
+    protected void onResume()
+    {
+    	super.onResume();
+    	initializeMap();
+    }
+}

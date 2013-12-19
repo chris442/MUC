@@ -1,0 +1,52 @@
+package com.example.muc_coursework;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+	//static final LatLng HAMBURG = new LatLng(53.558, 9.927);
+	 //static final LatLng KIEL = new LatLng(53.551, 9.993);
+	private GoogleMap googleMap;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        try
+        {
+        	initializeMap();
+        }catch (Exception e)
+        {
+        	e.printStackTrace();
+        }
+    }
+    
+    private void initializeMap()
+    {
+    	if(googleMap==null)
+    	{
+    		googleMap=((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+    		
+    		if(googleMap==null)
+    		{
+    			Toast.makeText(getApplicationContext(), "WARNING! Unable to create map", Toast.LENGTH_SHORT).show();
+    		}
+    	}
+    } 
+    @Override
+    protected void onResume()
+    {
+    	super.onResume();
+    	initializeMap();
+    }
+}

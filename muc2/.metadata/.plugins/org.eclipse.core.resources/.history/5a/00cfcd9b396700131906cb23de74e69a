@@ -1,0 +1,257 @@
+package com.example.muc_coursework;
+
+import java.util.Calendar;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.Dialog;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+	
+	private GoogleMap googleMap;
+	
+	private int mapType =GoogleMap.MAP_TYPE_NORMAL;
+	
+	static final LatLng GLASGOW = new LatLng(55.8580,-4.2590);
+	static final LatLng SECC = new LatLng(55.8607,-4.2871);
+	static final LatLng BARRY_BUDDON_SHOOTING = new LatLng(56.499, -2.7543);
+	static final LatLng PARKHEAD = new LatLng(55.8497, -4.2055);
+	static final LatLng CATHKIN_BRAES= new LatLng(55.79434, -4.2193);
+	static final LatLng VELODROME = new LatLng(55.847, -4.2076);
+	static final LatLng INTERNATIONAL_HOCKEY = new LatLng(55.8447, -4.236);
+	static final LatLng HAMPDEN = new LatLng(55.8255, -4.2520);
+	static final LatLng IBROX = new LatLng(55.853,-4.309);
+	static final LatLng KELVINGROVE_BOWLS= new LatLng(55.867,-4.2871);
+	static final LatLng SCOTSTOUN = new LatLng(55.8813,-4.3405);
+	static final LatLng TOLLCROSS = new LatLng(55.845, -4.177);
+	static final LatLng STRATHCLYDE = new LatLng(55.7971971, -4.0342997);
+	
+	static final LatLng DELHI= new LatLng(28.61, 77.23);
+	static final LatLng MELBOURNE = new LatLng(-37.813611, 144.963056);
+	static final LatLng MANCHESTER = new LatLng(53.466667, -2.233333);
+	static final LatLng KUALALUMPUR = new LatLng(3.1475, 101.693333);
+	static final LatLng VICTORIA = new LatLng(48.428611, -123.365556);
+	static final LatLng AUCKLAND= new LatLng(-36.840417, 174.739869);
+	static final LatLng BRISBANE = new LatLng(-27.467917, 153.027778);
+	static final LatLng EDMONTON = new LatLng(53.533333, -113.5);
+	static final LatLng CHRISTCHURCH = new LatLng(-43.53, 172.620278);
+	static final LatLng EDINBURGH = new LatLng(55.939, -3.172);
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        try
+        {
+        	initializeMap();
+        }catch (Exception e)
+        {
+        	e.printStackTrace();
+        }
+    }
+    
+    private void initializeMap()
+    {
+    	if(googleMap==null)
+    	{
+    		googleMap=((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+    		
+    		
+    		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(GLASGOW, 11));
+    		
+    		Marker secc =googleMap.addMarker(new MarkerOptions().position(SECC)
+    				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+    				.title("SECC").snippet("Exhibition Way, Glasgow, G3 8YW\nSports: Boxing, Gymnastics, Judo, Netball, Wrestling, Weightlifting"));
+    		
+    		Marker barryBuddonShooting =googleMap.addMarker(new MarkerOptions().position(BARRY_BUDDON_SHOOTING)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.shooting)).title("Barry Buddon Shooting Centre")
+    				.snippet("Barry, Carnoustie, Angus, DD7 7RY \nSports: Shooting"));
+    		
+    		Marker parkhead =googleMap.addMarker(new MarkerOptions().position(PARKHEAD)
+    				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+    				.title("Parkhead Stadium").snippet("Celtic Park, Glasgow, G40 3RE\nSports: Opening Ceremony"));
+    		
+    		Marker cathkinBraes =googleMap.addMarker(new MarkerOptions().position(CATHKIN_BRAES)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.bike)).title("Cathkin Braes")
+    				.snippet("Cathkin Rd, Rutherglen, Glasgow G73 4SE\nSports: Mountain Bike"));
+    		
+    		Marker veledrome =googleMap.addMarker(new MarkerOptions().position(VELODROME)
+    				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+    				.title("Emirates & Veledrome").snippet("1000 London Rd, Glasgow, G40 3HY\nSports: Badminton, Cycling"));
+    		
+    		Marker internationalHockey =googleMap.addMarker(new MarkerOptions().position(INTERNATIONAL_HOCKEY)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.hockey)).title("Glasgow National Hockey Centre")
+    				.snippet("Greendykes St, Saltmarket, Glasgow, G1 5DB\nSports: Hockey"));
+    		
+    		Marker hampden =googleMap.addMarker(new MarkerOptions().position(HAMPDEN)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.running)).title("Hampden Stadium")
+    				.snippet("Letherby Dr, Glasgow, G42 9BA\nSports: Athletics"));
+    		
+    		Marker ibrox =googleMap.addMarker(new MarkerOptions().position(IBROX)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.rugby)).title("Ibrox Stadium")
+    				.snippet("150 Edmiston Dr, Glasgow, G51 2XD\nSports: Rugby Sevens"));
+    		
+    		Marker kelvingroveBowls =googleMap.addMarker(new MarkerOptions().position(KELVINGROVE_BOWLS)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.bowls)).title("Kelvingrove Lawn Bowls")
+    				.snippet("Kelvin Way, Glasgow, G3 7TA\nSports: Lawn Bowls"));
+    		
+    		Marker scotstoun =googleMap.addMarker(new MarkerOptions().position(SCOTSTOUN)
+    				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Scotstoun Leisure Centre")
+    				.snippet("72 Danes Dr, Glasgow, G14 9HD\nSports: Squash, Table Tennis"));
+    		
+    		Marker tollcross =googleMap.addMarker(new MarkerOptions().position(TOLLCROSS)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.swim)).title("Tollcross Swimming Centre")
+    				.snippet("367 Wellshot Rd, Glasgow, G32 7QP\nSports: Swimming"));
+    		
+    		Marker strathclyde =googleMap.addMarker(new MarkerOptions().position(STRATHCLYDE)
+    				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Strathclyde Country Park")
+    				.snippet("366 Hamilton Rd, Motherwell, ML1 3ED\nSports: Triathlon"));
+    		
+    		Marker edinburghSwim =googleMap.addMarker(new MarkerOptions().position(EDINBURGH)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.swim)).title("Royal Commonwealth Pool")
+    				.snippet("21 Dalkeith Rd, Edinburgh, EH16 5BB\nSports: Diving"));
+    		
+    		//hostcities
+    		Marker delhi =googleMap.addMarker(new MarkerOptions().position(DELHI)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.delhi))
+    				.title("Delhi").snippet("India, Delhi, 2010, 9G 10S 7B (26) rank 10"));
+    		
+    		Marker melbourne =googleMap.addMarker(new MarkerOptions().position(MELBOURNE)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.melbourne))
+    				.title("Melbourne").snippet("Australia, Melbourne, 2006, 11g 7s 11b (29) rank 6"));
+    		
+    		Marker manchester =googleMap.addMarker(new MarkerOptions().position(MANCHESTER)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.manchester))
+    				.title("Manchester").snippet("England, Manchester, 2002, 6g 8s 15b (29) rank 10"));
+    		
+    		Marker kualaLumpur =googleMap.addMarker(new MarkerOptions().position(KUALALUMPUR)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.kuala))
+    				.title("Kuala Lumpur").snippet("Malaysia, Kuala Lumpur, 1998, 3g 2s 7b (12) rank 11"));
+    		
+    		Marker victoria =googleMap.addMarker(new MarkerOptions().position(VICTORIA)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.victoria))
+    				.title("Victoria").snippet("Cananda, Victoria, 1994, 6g 3s 11b (20) rank 7"));
+    		
+    		Marker auckland =googleMap.addMarker(new MarkerOptions().position(AUCKLAND)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.auckland))
+    				.title("Auckland").snippet("New Zeland, Auckland, 1990, 5g 7s 10b (22) rank 9"));
+    		
+    		Marker edinburgh =googleMap.addMarker(new MarkerOptions().position(EDINBURGH)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.edinburgh))
+    				.title("Edinburgh").snippet("Scotland, Edinburgh, 1986, 3g 12s 18b (33) rank 6"));
+    		
+    		Marker brisbane =googleMap.addMarker(new MarkerOptions().position(BRISBANE)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.brisbane))
+    				.title("Brisbane").snippet("Australia, Brisbane, 1982, 8g 6s 12b (26) rank 4"));
+    		
+    		Marker edmonton =googleMap.addMarker(new MarkerOptions().position(EDMONTON)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.edmonton))
+    				.title("Edmonton").snippet("Canada, Edmonton, 1978, 3g 5s 11b (19) rank 7"));
+    		
+    		Marker christchurch =googleMap.addMarker(new MarkerOptions().position(CHRISTCHURCH)
+    				.icon(BitmapDescriptorFactory.fromResource(R.drawable.christchurch))
+    				.title("Christchurch").snippet("New Zeland, Christchurch, 1974, 3g 5s 11b (19) rank 7"));
+    	
+    		
+    		googleMap.setOnMarkerClickListener((OnMarkerClickListener)this);
+    			
+    		googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+    		googleMap.getUiSettings().setZoomControlsEnabled(true);
+    		googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+    		
+    		/*googleMap.setInfoWindowAdapter(new InfoWindowAdapter()
+    		{
+    			@Override
+    			public View getInfoWindow(Marker arg0)
+    			{
+    				return null;
+    			}
+    			
+    			public View getInfoContents(Marker marker)
+    			{
+    				View v = getLayoutInflator().inflate(R.layout.marker,null);
+        			
+        			TextView info=(TextView) v.findViewById(R.id.info);
+        			
+        			return v;
+    			}
+    		});*/
+    		
+    		if(googleMap==null)
+    		{
+    			Toast.makeText(getApplicationContext(), "WARNING! Unable to create map", Toast.LENGTH_SHORT).show();
+    		}
+    	}
+    } 
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+    	super.onCreateOptionsMenu(menu);
+    	getMenuInflater().inflate(R.menu.map_styles_menu, menu);
+		return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	super.onOptionsItemSelected(item);
+    	
+    	switch(item.getItemID())
+    	{
+    	case R.id.normal_map:
+    		mapType=GoogleMap.MAP_TYPE_NORMAL;
+    		break;
+    		
+    	case R.id.satellite_map:
+    		mapType=GoogleMap.MAP_TYPE_SATELLITE;
+    		break;
+    		
+    	case R.id.terrain_map:
+    		mapType=GoogleMap.MAP_TYPE_TERRAIN;
+    		break;
+    		
+    	case R.id.hybrid_map:
+    		mapType=GoogleMap.MAP_TYPE_HYBRID;
+    		break;
+    	}
+    	
+    	googleMap.setMapType(mapType);
+    	break;
+    }
+    
+    public boolean onMarkerClick(Marker marker)
+    {
+    	marker.showInfoWindow();
+    	return true;
+    }
+    
+    @Override
+    protected void onResume()
+    {
+    	super.onResume();
+    	initializeMap();
+    }
+
+}

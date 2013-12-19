@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chris MacNeil S1024734 -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_info"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" android:background="#000000">
+
+    <Button
+        android:id="@+id/reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="86dp"
+        android:layout_marginRight="36dp"
+        android:text="Set Reminder" android:padding="6dp" android:background="#00FFFF" >
+    </Button>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/reminder"
+        android:layout_alignBottom="@+id/reminder"
+        android:layout_marginRight="44dp"
+        android:layout_toLeftOf="@+id/reminder"
+        android:text="Back" android:padding="6dp" android:background="#00FFFF" >
+    </Button>
+
+    <EditText
+        android:id="@+id/infoView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp" android:textColor="#FFBBFF" android:background="#000000">
+
+        <requestFocus>
+        </requestFocus>
+    </EditText>
+
+</RelativeLayout>

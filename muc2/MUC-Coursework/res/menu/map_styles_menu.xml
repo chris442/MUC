@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/map_types"
+        android:title="Menu"
+        android:showAsAction="always">
+        <menu>
+            <!-- set up clickable options from menu-->
+            <item android:id="@+id/normal_map"
+                android:title="Mormal Map"/>
+            <item android:id="@+id/satellite_map"
+                android:title="Satellite Map"/>
+            <item android:id="@+id/terrain_map"
+                android:title="Terrain Map"/>
+            <item android:id="@+id/hybrid_map"
+                android:title="Hybrid Map"/>
+            <item android:id="@+id/games2014"
+                android:title="2014 Games"/>
+            <item android:id="@+id/games_past"
+                android:title="Previous Games"/>
+            <item android:id="@+id/location"
+                android:title="Enter Location"/>
+        </menu>     
+    </item>   
+</menu>
